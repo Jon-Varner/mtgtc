@@ -1,0 +1,12 @@
+@import '../../scss/utils';
+
+main {
+  margin: 0 auto;
+  padding: 5rem 1rem;
+  text-align: center;
+  max-width: $max-width;
+
+  @include breakpoint(md) {
+    padding-top: 8rem;
+  }
+}

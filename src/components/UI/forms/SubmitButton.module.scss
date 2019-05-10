@@ -1,0 +1,14 @@
+@import '../../../scss/colors';
+
+.submitButton {
+  border: 0;
+  padding: 0.25rem;
+  color: $white;
+  background-color: $orange;
+  border-radius: 0.2rem;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}

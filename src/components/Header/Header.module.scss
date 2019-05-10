@@ -1,0 +1,79 @@
+@import '../../scss/colors';
+@import '../../scss/typography';
+@import '../../scss/utils';
+
+header {
+  position: fixed;
+  z-index: 100;
+  padding: 1rem;
+  width: 100%;
+  text-align: center;
+  background-color: $dark-gray;
+  color: $white;
+
+  h1 {
+    font-size: 1rem;
+    font-family: $headline-font;
+    font-weight: $headline-weight;
+    text-transform: uppercase;
+
+    @include breakpoint(md) {
+      font-size: 1.5rem;
+    }
+  }
+
+  .headerForms {
+    display: none;
+
+    @include breakpoint(md) {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    &.isOpen {
+      display: block;
+
+      @include breakpoint(md) {
+        display: flex;
+      }
+    }
+
+    form {
+      margin-top: 1rem;
+      text-align: center;
+
+      label {
+        margin: 0 0.5rem;
+
+        &.inLabel {
+          display: block;
+        }
+      }
+
+      input[type='text'],
+      select {
+        padding: 0.25rem;
+        line-height: 1.5em;
+        height: 2rem;
+        border: 0;
+        border-radius: 0.2rem;
+      }
+
+      input[type='text'] {
+        width: 10rem;
+      }
+
+      button {
+        display: block;
+        margin: 1rem auto 0 auto;
+
+        @include breakpoint(md) {
+          display: inline;
+          margin: 0 1rem;
+        }
+      }
+    }
+  }
+}

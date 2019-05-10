@@ -1,0 +1,60 @@
+@import '../../scss/colors';
+@import '../../scss/utils';
+
+.menuToggle {
+  display: inline-block;
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  cursor: pointer;
+  position: absolute;
+  right: 1rem;
+  top: 0.75rem;
+
+  &:hover {
+    color: transparent;
+    background-color: transparent;
+  }
+
+  .menuHamburger {
+    display: block;
+    width: 2rem;
+    height: 0.25rem;
+    margin-top: 0;
+    transition-timing-function: ease;
+    transition-duration: 0.15s;
+    transition-property: transform, opacity;
+    border-radius: 0.25rem;
+    background-color: $white;
+  }
+
+  .menuHamburger:first-child {
+    margin-bottom: 0.25rem;
+  }
+
+  .menuHamburger:last-child {
+    margin-top: 0.25rem;
+  }
+
+  @include breakpoint(md) {
+    display: none;
+  }
+}
+
+.isOpen {
+  .menuHamburger:first-child {
+    margin-bottom: -0.25rem;
+    transform: rotate(45deg);
+  }
+  .menuHamburger:nth-child(2) {
+    opacity: 0;
+  }
+  .menuHamburger:last-child {
+    margin-top: -0.25rem;
+    transform: rotate(-45deg);
+  }
+}
