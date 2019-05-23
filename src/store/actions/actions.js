@@ -5,11 +5,12 @@ export const toggleMenu = () => ({
   type: actionTypes.TOGGLE_MENU
 });
 
-export const updateSearch = (searchTerm, searchProperty) => ({
+export const updateSearch = (searchTerm, searchProperty, sortProperty) => ({
   type: actionTypes.UPDATE_SEARCH,
   payload: {
     searchTerm: searchTerm,
-    searchProperty: searchProperty
+    searchProperty: searchProperty,
+    sortProperty: sortProperty
   }
 });
 
@@ -22,7 +23,8 @@ export const fetchCards = (
   pageNumber = 1,
   cardType = 'creature',
   searchTerm = '',
-  searchProperty = ''
+  searchProperty = '',
+  sortProperty = ''
 ) => {
   return dispatch => {
     dispatch(fetchCardsBegin());
@@ -35,6 +37,10 @@ export const fetchCards = (
 
     if (searchTerm !== '') {
       query += '&' + encodeURI(searchProperty) + '=' + encodeURI(searchTerm);
+    }
+
+    if (sortProperty !== '') {
+      query += '&orderBy=' + encodeURI(sortProperty);
     }
 
     axios

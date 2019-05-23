@@ -7,10 +7,11 @@ import { SubmitButton } from '../UI/forms/SubmitButton';
 
 import classes from './Header.module.scss';
 
-export const Header = memo(({ menuOpen, toggleMenu, search, sort, sortBy }) => {
+export const Header = memo(({ menuOpen, toggleMenu, search }) => {
   const [values, setValues] = useState({
     searchTerm: '',
-    searchProperty: 'name'
+    searchProperty: 'name',
+    sortProperty: 'name'
   });
 
   const classNames = menuOpen
@@ -36,21 +37,6 @@ export const Header = memo(({ menuOpen, toggleMenu, search, sort, sortBy }) => {
       <h1>Magic: the Gathering: the Creatures</h1>
 
       <div className={classNames}>
-        <form className={classes.sortForm}>
-          <label htmlFor="sortBy">Sort by:</label>
-          <select
-            id="Sort by:"
-            name="Sort by:"
-            value={sortBy}
-            onChange={e => sort(e.target.value)}
-          >
-            {options.map(option => (
-              <option key={uuid.v4()} value={option}>
-                {option}
-              </option>
-            ))}
-          </select>
-        </form>
         <form onSubmit={submitFormHandler} className={classes.searchForm}>
           <label htmlFor="searchTerm">Search for:</label>
           <input
@@ -74,6 +60,19 @@ export const Header = memo(({ menuOpen, toggleMenu, search, sort, sortBy }) => {
               </option>
             ))}
           </select>
+          <label htmlFor="sortBy">Sort by:</label>
+          <select
+            id="sortProperty"
+            name="sortProperty"
+            value={values.sortProperty}
+            onChange={updateField}
+          >
+            {options.map(option => (
+              <option key={uuid.v4()} value={option}>
+                {option}
+              </option>
+            ))}
+          </select>
           <SubmitButton text={'Search'} />
         </form>
       </div>
@@ -85,6 +84,5 @@ export const Header = memo(({ menuOpen, toggleMenu, search, sort, sortBy }) => {
 Header.propTypes = {
   menuOpen: PropTypes.bool,
   toggleMenu: PropTypes.func,
-  search: PropTypes.func.isRequired,
-  sort: PropTypes.func.isRequired
+  search: PropTypes.func.isRequired
 };

@@ -2,39 +2,47 @@
 
 .card {
   /* These are the exact dimensions of the card images returned from the API */
-  height: 310px;
+  height: 330px;
   width: 223px;
   margin: 1rem;
   overflow: hidden;
   position: relative;
 
-  img {
-    position: absolute;
-    z-index: 1;
-  }
-
-  .cardInfo {
-    position: absolute;
-    z-index: 2;
-    top: 0;
-    left: 0;
-    display: block;
-    height: 100%;
-    width: 100%;
-    padding: 1rem;
+  .cardContainer {
+    height: 310px;
+    width: 223px;
     overflow: hidden;
-    color: $white;
-    background-color: $dark-gray;
-    cursor: pointer;
-    opacity: 0;
-    transition: 0.3s opacity;
+    position: relative;
 
-    &.isVisible {
-      opacity: 1;
+    img {
+      position: absolute;
+      bottom: 0;
+      z-index: 1;
     }
 
-    dt:not(:first-child) {
-      margin-top: 1rem;
+    .cardInfo {
+      position: absolute;
+      z-index: 2;
+      bottom: 0;
+      left: 0;
+      display: block;
+      height: 100%;
+      width: 100%;
+      padding: 1rem;
+      overflow: hidden;
+      color: $white;
+      background-color: $dark-gray;
+      cursor: pointer;
+      opacity: 0;
+      transition: 0.3s opacity;
+
+      &.isVisible {
+        opacity: 1;
+      }
+
+      dt:not(:first-child) {
+        margin-top: 1rem;
+      }
     }
   }
 }

@@ -35,7 +35,8 @@ class Layout extends Component {
     /* Fetch a new set of cards from the API whenever our search criteria changes */
     if (
       this.props.searchTerm !== prevProps.searchTerm ||
-      this.props.searchProperty !== prevProps.searchProperty
+      this.props.searchProperty !== prevProps.searchProperty ||
+      this.props.sortProperty !== prevProps.sortProperty
     )
       this.fetchCardsHandler();
   }
@@ -46,7 +47,8 @@ class Layout extends Component {
         this.props.currentPage,
         'creature', //hard-coded per exercise instructions
         this.props.searchTerm,
-        this.props.searchProperty
+        this.props.searchProperty,
+        this.props.sortProperty
       );
     }
   };
@@ -56,11 +58,7 @@ class Layout extends Component {
   };
 
   searchHandler = data => {
-    this.props.search(data.searchTerm, data.searchProperty);
-  };
-
-  sortHandler = sortBy => {
-    this.props.sort(sortBy);
+    this.props.search(data.searchTerm, data.searchProperty, data.sortProperty);
   };
 
   render() {
@@ -70,8 +68,6 @@ class Layout extends Component {
           menuOpen={this.props.menuOpen}
           toggleMenu={this.toggleMenuHandler}
           search={this.searchHandler}
-          sort={this.sortHandler}
-          sortBy={this.props.sortBy}
         />
         <main>
           <CardList
@@ -79,7 +75,6 @@ class Layout extends Component {
             error={this.props.apiError}
             loading={this.props.loading}
             searchTerm={this.props.searchTerm}
-            sortBy={this.props.sortBy}
           />
           <LoadingIndicator
             ref={this.indicatorRef}
@@ -100,20 +95,31 @@ const mapStateToProps = state => {
     menuOpen: state.menuToggle.menuOpen,
     searchTerm: state.cards.searchTerm,
     searchProperty: state.cards.searchProperty,
-    sortBy: state.cards.sortBy
+    sortProperty: state.cards.sortProperty
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchCards: (pageNumber, cardType, searchTerm, searchProperty) =>
+    fetchCards: (
+      pageNumber,
+      cardType,
+      searchTerm,
+      searchProperty,
+      sortProperty
+    ) =>
       dispatch(
-        actions.fetchCards(pageNumber, cardType, searchTerm, searchProperty)
+        actions.fetchCards(
+          pageNumber,
+          cardType,
+          searchTerm,
+          searchProperty,
+          sortProperty
+        )
       ),
     toggleMenu: () => dispatch(actions.toggleMenu()),
-    search: (searchTerm, searchProperty) =>
-      dispatch(actions.updateSearch(searchTerm, searchProperty)),
-    sort: sortBy => dispatch(actions.updateSort(sortBy))
+    search: (searchTerm, searchProperty, sortProperty) =>
+      dispatch(actions.updateSearch(searchTerm, searchProperty, sortProperty))
   };
 };
 

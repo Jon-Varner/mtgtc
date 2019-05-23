@@ -13,7 +13,7 @@ const initialState = {
   loading: false,
   searchTerm: '',
   searchProperty: '',
-  sortBy: 'name'
+  sortProperty: 'name'
 };
 
 const reducer = (state = initialState, action) => {
@@ -53,7 +53,8 @@ const reducer = (state = initialState, action) => {
         cards: [],
         currentPage: 1,
         searchProperty: action.payload.searchProperty,
-        searchTerm: action.payload.searchTerm
+        searchTerm: action.payload.searchTerm,
+        sortProperty: action.payload.sortProperty
       };
 
     case UPDATE_SORT:
